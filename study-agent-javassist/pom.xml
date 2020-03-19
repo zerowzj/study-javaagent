@@ -18,8 +18,8 @@
         <!--        <premain.class>study.agent.javassist.staic.StaticAgent</premain.class>-->
         <!--        <main.class>test.study.agent.javassist.monitor.StaticMain</main.class>-->
 
-        <premain.class>study.agent.javassist.monitor.MonitorAgent</premain.class>
-        <main.class>test.study.agent.javassist.monitor.MonitorMain</main.class>
+        <premain-class>study.agent.javassist.monitor.MonitorAgent</premain-class>
+        <start-class>test.study.agent.javassist.monitor.MonitorMain</start-class>
     </properties>
 
     <dependencies>
@@ -55,7 +55,7 @@
                     <appendAssemblyId>false</appendAssemblyId>
                     <archive>
                         <manifestEntries>
-                            <Premain-Class>${premain.class}</Premain-Class>
+                            <Premain-Class>${premain-class}</Premain-Class>
                             <Can-Redefine-Classes>true</Can-Redefine-Classes>
                         </manifestEntries>
                     </archive>
@@ -94,7 +94,7 @@
                         <argument>
                             ${target.path}/classes${path.separator}${target.path}/test-classes
                         </argument>
-                        <argument>${main.class}</argument>
+                        <argument>${start-class}</argument>
                     </arguments>
                 </configuration>
             </plugin>

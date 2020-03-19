@@ -11,9 +11,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <!--        <premain.class>study.javaagent.demo.AgentDemo</premain.class>-->
-        <!--        <premain.class>study.agent.javaassit.staic.StaticAgent</premain.class>-->
-        <premain.class>study.agent.timer.TimerAgent</premain.class>
+        <target.path>${project.basedir}/target</target.path>
+
+        <premain.class>study.agent.bytebuddy.TimerAgent</premain.class>
+        <main.class>test.study.agent.bytebuddy.TimerMain</main.class>
     </properties>
 
     <dependencies>
@@ -42,6 +43,7 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <finalName>study-agent</finalName>
                     <createDependencyReducedPom>false</createDependencyReducedPom>
                     <shadedArtifactAttached>false</shadedArtifactAttached>
                     <shadedClassifierName>my-name</shadedClassifierName>
@@ -55,11 +57,34 @@
                         </transformer>
                     </transformers>
                     <artifactSet>
-                        <includes>ManifestResourceTransformer
-                            <include>org.javassist:javassist</include>
+                        <includes>
                             <include>net.bytebuddy:byte-buddy</include>
                         </includes>
                     </artifactSet>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.6.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <executable>java</executable>
+                    <classpathScope>runtime</classpathScope>
+                    <arguments>
+                        <argument>-javaagent:${target.path}/study-agent.jar</argument>
+                        <argument>-classpath</argument>
+                        <argument>
+                            ${target.path}/classes${path.separator}${target.path}/test-classes
+                        </argument>
+                        <argument>${main.class}</argument>
+                    </arguments>
                 </configuration>
             </plugin>
         </plugins>

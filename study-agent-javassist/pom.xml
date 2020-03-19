@@ -19,7 +19,7 @@
         <!--        <main.class>test.study.agent.javassist.monitor.StaticMain</main.class>-->
 
         <premain-class>study.agent.javassist.monitor.MonitorAgent</premain-class>
-        <start-class>test.study.agent.javassist.monitor.MonitorMain</start-class>
+        <main-class>test.study.agent.javassist.monitor.MonitorMain</main-class>
     </properties>
 
     <dependencies>
@@ -94,7 +94,7 @@
                         <argument>
                             ${target.path}/classes${path.separator}${target.path}/test-classes
                         </argument>
-                        <argument>${start-class}</argument>
+                        <argument>${main-class}</argument>
                     </arguments>
                 </configuration>
             </plugin>

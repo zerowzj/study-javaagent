@@ -12,12 +12,14 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <target.path>${project.basedir}/target</target.path>
-        <!---->
-<!--        <premain.class>study.agent.javassist.demo.DemoAgent</premain.class>-->
-        <premain.class>study.agent.javassist.staic.StaticAgent</premain.class>
-        <!---->
-<!--        <main.class>study.agent.javassist.Main</main.class>-->
-                <main.class>study.agent.javassist.staic.StaticMain</main.class>
+        <!-- Agent -->
+        <!--        <premain.class>study.agent.javassist.demo.DemoAgent</premain.class>-->
+        <!--        <premain.class>study.agent.javassist.staic.StaticAgent</premain.class>-->
+        <premain.class>study.agent.javassist.monitor.MonitorAgent</premain.class>
+        <!-- Main -->
+        <!--        <main.class>study.agent.javassist.Main</main.class>-->
+        <!--        <main.class>study.agent.javassist.Main</main.class>-->
+        <main.class>study.agent.javassist.monitor.MonitorMain</main.class>
     </properties>
 
     <dependencies>

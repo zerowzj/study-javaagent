@@ -16,10 +16,21 @@
     </properties>
 
     <dependencies>
+        <!-- ==================== -->
+        <!-- javassist            -->
+        <!-- ==================== -->
         <dependency>
             <groupId>org.javassist</groupId>
             <artifactId>javassist</artifactId>
             <version>3.26.0-GA</version>
+        </dependency>
+        <!-- ==================== -->
+        <!-- byte buddy           -->
+        <!-- ==================== -->
+        <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy</artifactId>
+            <version>1.10.8</version>
         </dependency>
     </dependencies>
 

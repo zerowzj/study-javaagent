@@ -24,7 +24,7 @@ public class MyTransformer implements ClassFileTransformer {
         className = className.replace('/', '.');
 
         // 只处理MyApplication类
-        if (!className.startsWith("stduy.javaagent")) {
+        if (!className.startsWith("study.agent")) {
             return classfileBuffer;
         }
 

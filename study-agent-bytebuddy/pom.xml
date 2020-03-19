@@ -13,7 +13,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <target.path>${project.basedir}/target</target.path>
 
-        <premain.class>study.agent.bytebuddy.TimerAgent</premain.class>
+        <premain.class>study.agent.bytebuddy.timer.TimerAgent</premain.class>
         <main.class>test.study.agent.bytebuddy.TimerMain</main.class>
     </properties>
 

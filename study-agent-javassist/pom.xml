@@ -74,9 +74,9 @@
                 <configuration>
                     <executable>java</executable>
                     <classpathScope>runtime</classpathScope>
-                    <additionalClasspathElements>${target.path}\test-classes</additionalClasspathElements>
+                    <additionalClasspathElements>${target.path}/test-classes</additionalClasspathElements>
                     <arguments>
-                        <argument>-javaagent:${target.path}\study-agent.jar</argument>
+                        <argument>-javaagent:${target.path}/study-agent.jar</argument>
                         <argument>-classpath</argument>
                         <classpath/>
                         <argument>${main.class}</argument>

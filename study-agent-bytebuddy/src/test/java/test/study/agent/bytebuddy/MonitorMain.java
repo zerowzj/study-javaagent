@@ -1,20 +1,15 @@
 package test.study.agent.bytebuddy;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MonitorMain {
 
-    private void fun1() throws Exception {
-        System.out.println("this is fun 1.");
-        Thread.sleep(500);
-    }
-
-    private void fun2() throws Exception {
-        System.out.println("this is fun 2.");
-        Thread.sleep(500);
-    }
-
     public static void main(String[] args) throws Exception {
-        MonitorMain test = new MonitorMain();
-        test.fun1();
-        test.fun2();
+        boolean is = true;
+        while (is) {
+            List<Object> list = new ArrayList<Object>();
+            list.add("hello world");
+        }
     }
 }

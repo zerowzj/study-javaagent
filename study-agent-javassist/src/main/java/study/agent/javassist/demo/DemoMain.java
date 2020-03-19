@@ -1,4 +1,4 @@
-package test.study.agent.javassist;
+package study.agent.javassist.demo;
 
 public class DemoMain {
 

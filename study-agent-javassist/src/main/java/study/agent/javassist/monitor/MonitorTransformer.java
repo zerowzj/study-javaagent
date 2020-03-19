@@ -31,7 +31,7 @@ public class MonitorTransformer implements ClassFileTransformer {
         try {
             String currentClassName = className.replaceAll("/", ".");
             if (!CLASS_NAME_SET.contains(currentClassName)) { //仅仅提升Set中含有的类
-                return null;
+                return classfileBuffer;
             }
             System.out.println("transform: [" + currentClassName + "]");
             CtClass ctClass = ClassPool.getDefault().get(currentClassName);
@@ -54,12 +54,12 @@ public class MonitorTransformer implements ClassFileTransformer {
         if (methodName.equalsIgnoreCase("main")) { // 不提升main方法
             return;
         }
-        final StringBuilder source = new StringBuilder();
+        StringBuilder source = new StringBuilder();
         source.append("{")
-                .append("long start = System.nanoTime();\n") // 前置增强: 打入时间戳
-                .append("$_ = $proceed($$);\n") // 保留原有的代码处理逻辑
+                .append("long start = System.nanoTime();\n") //前置增强: 打入时间戳
+                .append("$_ = $proceed($$);\n") //保留原有的代码处理逻辑
                 .append("System.out.print(\"method:[" + methodName + "]\");").append("\n")
-                .append("System.out.println(\" cost:[\" +(System.nanoTime() -start)+ \"ns]\");") // 后置增强
+                .append("System.out.println(\" cost:[\" +(System.nanoTime() -start)+ \"ns]\");") //后置增强
                 .append("}");
 
         ExprEditor editor = new ExprEditor() {

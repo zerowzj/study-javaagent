@@ -11,6 +11,6 @@ public class StaticAgent {
      * @param instrumentation
      */
     public static void premain(String agentArgs, Instrumentation instrumentation) {
-        instrumentation.addTransformer(new MyTransformer());
+        instrumentation.addTransformer(new StaticTransformer());
     }
 }

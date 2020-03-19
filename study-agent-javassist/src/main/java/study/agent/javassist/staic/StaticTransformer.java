@@ -8,7 +8,7 @@ import java.lang.instrument.ClassFileTransformer;
 import java.lang.instrument.IllegalClassFormatException;
 import java.security.ProtectionDomain;
 
-public class MyTransformer implements ClassFileTransformer {
+public class StaticTransformer implements ClassFileTransformer {
 
 
     @Override

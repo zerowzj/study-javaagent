@@ -12,13 +12,14 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <target.path>${project.basedir}/target</target.path>
-<!--        <premain.class>study.agent.javassist.demo.DemoAgent</premain.class>-->
-<!--        <main.class>study.agent.javassist.Main</main.class>-->
-        <premain.class>study.agent.javassist.staic.StaticAgent</premain.class>
-        <main.class>study.agent.javassist.staic.StaticMain</main.class>
+        <!--        <premain.class>study.agent.javassist.demo.DemoAgent</premain.class>-->
+        <!--        <main.class>study.agent.javassist.Main</main.class>-->
 
-<!--        <premain.class>study.agent.javassist.monitor.MonitorAgent</premain.class>-->
-<!--        <main.class>study.agent.javassist.monitor.MonitorMain</main.class>-->
+        <!--        <premain.class>study.agent.javassist.staic.StaticAgent</premain.class>-->
+        <!--        <main.class>study.agent.javassist.staic.StaticMain</main.class>-->
+
+        <premain.class>study.agent.javassist.monitor.MonitorAgent</premain.class>
+        <main.class>study.agent.javassist.monitor.MonitorMain</main.class>
     </properties>
 
     <dependencies>
@@ -75,9 +76,7 @@
                     <classpathScope>runtime</classpathScope>
                     <additionalClasspathElements>${target.path}\test-classes</additionalClasspathElements>
                     <arguments>
-                        <argument>
-                            -javaagent:${target.path}\study-agent.jar
-                        </argument>
+                        <argument>-javaagent:${target.path}\study-agent.jar</argument>
                         <argument>-classpath</argument>
                         <classpath/>
                         <argument>${main.class}</argument>

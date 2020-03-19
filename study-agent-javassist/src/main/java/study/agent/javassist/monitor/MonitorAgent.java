@@ -5,7 +5,7 @@ import java.lang.instrument.Instrumentation;
 
 public class MonitorAgent {
 
-    public void premain(String agentArgs, Instrumentation inst) {
+    public static void premain(String agentArgs, Instrumentation inst) {
         System.out.println("this is an perform monitor agent.");
         // 添加 Transformer
         ClassFileTransformer transformer = new MonitorTransformer();

@@ -1,8 +1,8 @@
-package study.javaagent.app;
+package study.agent.app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-import study.javaagent.app.support.SpringBootCfg;
+import study.agent.app.support.SpringBootCfg;
 
 public class Startup {
 

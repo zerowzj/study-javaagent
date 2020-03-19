@@ -1,4 +1,4 @@
-package study.agent.javassist.staic;
+package test.study.agent.javassist.monitor;
 
 import java.util.concurrent.TimeUnit;
 

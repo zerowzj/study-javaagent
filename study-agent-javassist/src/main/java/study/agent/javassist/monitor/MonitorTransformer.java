@@ -18,7 +18,7 @@ public class MonitorTransformer implements ClassFileTransformer {
     private static final Set<String> CLASS_NAME_SET = new HashSet<>();
 
     static {
-        CLASS_NAME_SET.add("study.agent.javassist.monitor.MonitorMain");
+        CLASS_NAME_SET.add("test.study.agent.javassist.monitor.MonitorMain");
     }
 
     @Override

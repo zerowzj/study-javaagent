@@ -1,4 +1,4 @@
-package study.agent.javassist.monitor;
+package test.study.agent.javassist.monitor;
 
 public class MonitorMain {
     private void fun1() {

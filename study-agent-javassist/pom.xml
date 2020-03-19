@@ -16,10 +16,10 @@
         <!--        <main.class>study.agent.javassist.Main</main.class>-->
 
         <!--        <premain.class>study.agent.javassist.staic.StaticAgent</premain.class>-->
-        <!--        <main.class>study.agent.javassist.staic.StaticMain</main.class>-->
+        <!--        <main.class>test.study.agent.javassist.monitor.StaticMain</main.class>-->
 
         <premain.class>study.agent.javassist.monitor.MonitorAgent</premain.class>
-        <main.class>study.agent.javassist.monitor.MonitorMain</main.class>
+        <main.class>test.study.agent.javassist.monitor.MonitorMain</main.class>
     </properties>
 
     <dependencies>
@@ -71,14 +71,29 @@
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>1.6.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
+                </executions>
                 <configuration>
+                    <!-- 使用java命令来执行应用程序 -->
                     <executable>java</executable>
                     <classpathScope>runtime</classpathScope>
-                    <additionalClasspathElements>${target.path}/test-classes</additionalClasspathElements>
-                    <arguments>
+                    <additionalClasspathElements>
+                        ${target.path}/test-classes,${project.basedir}/../test-classes
+                    </additionalClasspathElements>
+                    <arguments><!-- 设置java命令后面附带的参数 -->
                         <argument>-javaagent:${target.path}/study-agent.jar</argument>
                         <argument>-classpath</argument>
-                        <classpath/>
+                        <!-- 插件将收集所有的依赖库和编译好的class文件,也可以指定使用哪些依赖，如果依赖太多，这样做太费事。根据java命令的规则，classpath必须放在程序入口之前 -->
+                        <!--                        <classpath/>-->
+                        <!-- 手动拼接classpath -->
+                        <argument>
+                            ${target.path}/classes${path.separator}${target.path}/test-classes
+                        </argument>
                         <argument>${main.class}</argument>
                     </arguments>
                 </configuration>

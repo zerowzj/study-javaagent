@@ -1,4 +1,4 @@
-package study.agent.demo;
+package study.agent.javassist.demo;
 
 import java.lang.instrument.Instrumentation;
 

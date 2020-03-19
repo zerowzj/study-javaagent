@@ -12,19 +12,11 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <!--        <premain.class>study.javaagent.demo.AgentDemo</premain.class>-->
-        <!--        <premain.class>study.agent.staic.StaticAgent</premain.class>-->
+        <!--        <premain.class>study.agent.javaassit.staic.StaticAgent</premain.class>-->
         <premain.class>study.agent.timer.TimerAgent</premain.class>
     </properties>
 
     <dependencies>
-        <!-- ==================== -->
-        <!-- javassist            -->
-        <!-- ==================== -->
-        <dependency>
-            <groupId>org.javassist</groupId>
-            <artifactId>javassist</artifactId>
-            <version>3.26.0-GA</version>
-        </dependency>
         <!-- ==================== -->
         <!-- byte buddy           -->
         <!-- ==================== -->

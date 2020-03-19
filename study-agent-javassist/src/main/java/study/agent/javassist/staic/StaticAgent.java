@@ -1,4 +1,4 @@
-package study.agent.staic;
+package study.agent.javassist.staic;
 
 import java.lang.instrument.Instrumentation;
 

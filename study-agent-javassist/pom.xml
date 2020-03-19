@@ -12,14 +12,14 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <target.path>${project.basedir}/target</target.path>
-        <!--        <premain.class>study.agent.javassist.demo.DemoAgent</premain.class>-->
-        <!--        <main.class>study.agent.javassist.Main</main.class>-->
+                <premain.class>study.agent.javassist.demo.DemoAgent</premain.class>
+                <main.class>test.study.agent.javassist.DemoMain</main.class>
 
         <!--        <premain.class>study.agent.javassist.staic.StaticAgent</premain.class>-->
         <!--        <main.class>test.study.agent.javassist.monitor.StaticMain</main.class>-->
 
-        <premain-class>study.agent.javassist.monitor.MonitorAgent</premain-class>
-        <main-class>test.study.agent.javassist.monitor.MonitorMain</main-class>
+<!--        <premain-class>study.agent.javassist.monitor.MonitorAgent</premain-class>-->
+<!--        <main-class>test.study.agent.javassist.monitor.MonitorMain</main-class>-->
     </properties>
 
     <dependencies>
@@ -55,7 +55,7 @@
                     <appendAssemblyId>false</appendAssemblyId>
                     <archive>
                         <manifestEntries>
-                            <Premain-Class>${premain-class}</Premain-Class>
+                            <Premain-Class>${premain.class}</Premain-Class>
                             <Can-Redefine-Classes>true</Can-Redefine-Classes>
                         </manifestEntries>
                     </archive>
@@ -86,6 +86,7 @@
                         ${target.path}/test-classes,${project.basedir}/../test-classes
                     </additionalClasspathElements>
                     <arguments><!-- 设置java命令后面附带的参数 -->
+                        <argument>-Dfile.encoding=utf-8</argument>
                         <argument>-javaagent:${target.path}/study-agent.jar</argument>
                         <argument>-classpath</argument>
                         <!-- 插件将收集所有的依赖库和编译好的class文件,也可以指定使用哪些依赖，如果依赖太多，这样做太费事。根据java命令的规则，classpath必须放在程序入口之前 -->
@@ -94,7 +95,7 @@
                         <argument>
                             ${target.path}/classes${path.separator}${target.path}/test-classes
                         </argument>
-                        <argument>${main-class}</argument>
+                        <argument>${main.class}</argument>
                     </arguments>
                 </configuration>
             </plugin>

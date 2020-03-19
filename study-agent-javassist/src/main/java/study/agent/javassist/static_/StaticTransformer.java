@@ -1,4 +1,4 @@
-package study.agent.javassist.staic;
+package study.agent.javassist.static_;
 
 import javassist.ClassPool;
 import javassist.CtClass;

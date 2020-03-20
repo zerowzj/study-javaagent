@@ -13,4 +13,10 @@ public class DemoController {
         log.info("sayHi...");
         return String.format("hi, %s", name);
     }
+
+    @GetMapping("/sayBye")
+    public String sayBye(String name) {
+        log.info("sayBye...");
+        return String.format("bye, %s", name);
+    }
 }

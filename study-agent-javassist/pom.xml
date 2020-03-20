@@ -12,14 +12,16 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <target.path>${project.basedir}/target</target.path>
-                <premain.class>study.agent.javassist.demo.DemoAgent</premain.class>
-                <main.class>test.study.agent.javassist.DemoMain</main.class>
+        <!--                <premain.class>study.agent.javassist.demo.DemoAgent</premain.class>-->
+        <!--                <main.class>test.study.agent.javassist.DemoMain</main.class>-->
 
         <!--        <premain.class>study.agent.javassist.staic.StaticAgent</premain.class>-->
         <!--        <main.class>test.study.agent.javassist.monitor.StaticMain</main.class>-->
 
-<!--        <premain-class>study.agent.javassist.monitor.MonitorAgent</premain-class>-->
-<!--        <main-class>test.study.agent.javassist.monitor.MonitorMain</main-class>-->
+        <premain.class>study.agent.javassist.monitor.MonitorAgent</premain.class>
+        <main.class>test.study.agent.javassist.MonitorMain</main.class>
+
+        <agent.class>study.agent.javassist.dynamic.DynamicAgent</agent.class>
     </properties>
 
     <dependencies>
@@ -31,75 +33,133 @@
             <artifactId>javassist</artifactId>
             <version>3.26.0-GA</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.sun</groupId>
+            <artifactId>tools</artifactId>
+            <version>1.8</version>
+            <scope>system</scope>
+            <systemPath>${JAVA_HOME}/lib/tools.jar</systemPath>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
-            <!-- ==================== -->
-            <!-- assembly            -->
-            <!-- ==================== -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-assembly-plugin</artifactId>
+                <artifactId>maven-jar-plugin</artifactId>
                 <version>3.1.1</version>
                 <executions>
                     <execution>
-                        <id>make-assembly</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
+                        <id>default-jar</id>
+                        <phase>none</phase>
                     </execution>
                 </executions>
-                <configuration>
-                    <finalName>study-agent</finalName>
-                    <appendAssemblyId>false</appendAssemblyId>
-                    <archive>
-                        <manifestEntries>
-                            <Premain-Class>${premain.class}</Premain-Class>
-                            <Can-Redefine-Classes>true</Can-Redefine-Classes>
-                            <Can-Retransform-Classes>true</Can-Retransform-Classes>
-                        </manifestEntries>
-                    </archive>
-                    <descriptors>
-                        <descriptor>src/main/assembly/assembly.xml</descriptor>
-                    </descriptors>
-                </configuration>
-            </plugin>
-            <!-- ==================== -->
-            <!-- exec                 -->
-            <!-- ==================== -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>1.6.0</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <!-- 使用java命令来执行应用程序 -->
-                    <executable>java</executable>
-                    <classpathScope>runtime</classpathScope>
-                    <additionalClasspathElements>
-                        ${target.path}/test-classes,${project.basedir}/../test-classes
-                    </additionalClasspathElements>
-                    <arguments><!-- 设置java命令后面附带的参数 -->
-                        <argument>-Dfile.encoding=utf-8</argument>
-                        <argument>-javaagent:${target.path}/study-agent.jar</argument>
-                        <argument>-classpath</argument>
-                        <!-- 插件将收集所有的依赖库和编译好的class文件,也可以指定使用哪些依赖，如果依赖太多，这样做太费事。根据java命令的规则，classpath必须放在程序入口之前 -->
-                        <!--                        <classpath/>-->
-                        <!-- 手动拼接classpath -->
-                        <argument>
-                            ${target.path}/classes${path.separator}${target.path}/test-classes
-                        </argument>
-                        <argument>${main.class}</argument>
-                    </arguments>
-                </configuration>
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>pre</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-assembly-plugin</artifactId>
+                        <version>3.1.1</version>
+                        <executions>
+                            <execution>
+                                <id>make-assembly</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>single</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <finalName>study-agent</finalName>
+                            <appendAssemblyId>false</appendAssemblyId>
+                            <archive>
+                                <manifestEntries>
+                                    <Premain-Class>${premain.class}</Premain-Class>
+                                    <Can-Redefine-Classes>true</Can-Redefine-Classes>
+                                    <Can-Retransform-Classes>true</Can-Retransform-Classes>
+                                </manifestEntries>
+                            </archive>
+                            <descriptors>
+                                <descriptor>src/main/assembly/assembly.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>1.6.0</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <!-- 使用java命令来执行应用程序 -->
+                            <executable>java</executable>
+                            <classpathScope>runtime</classpathScope>
+                            <additionalClasspathElements>
+                                ${target.path}/test-classes,${project.basedir}/../test-classes
+                            </additionalClasspathElements>
+                            <arguments><!-- 设置java命令后面附带的参数 -->
+                                <argument>-Dfile.encoding=utf-8</argument>
+                                <argument>-javaagent:${target.path}/study-agent.jar</argument>
+                                <argument>-classpath</argument>
+                                <!-- 插件将收集所有的依赖库和编译好的class文件,也可以指定使用哪些依赖，如果依赖太多，这样做太费事。根据java命令的规则，classpath必须放在程序入口之前 -->
+                                <!--                        <classpath/>-->
+                                <!-- 手动拼接classpath -->
+                                <argument>
+                                    ${target.path}/classes${path.separator}${target.path}/test-classes
+                                </argument>
+                                <argument>${main.class}</argument>
+                            </arguments>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>agent</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-assembly-plugin</artifactId>
+                        <version>3.1.1</version>
+                        <executions>
+                            <execution>
+                                <id>make-assembly</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>single</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <finalName>study-agent</finalName>
+                            <appendAssemblyId>false</appendAssemblyId>
+                            <archive>
+                                <manifestEntries>
+                                    <Agent-Class>${agent.class}</Agent-Class>
+                                    <Can-Redefine-Classes>true</Can-Redefine-Classes>
+                                    <Can-Retransform-Classes>true</Can-Retransform-Classes>
+                                </manifestEntries>
+                            </archive>
+                            <descriptors>
+                                <descriptor>src/main/assembly/assembly.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

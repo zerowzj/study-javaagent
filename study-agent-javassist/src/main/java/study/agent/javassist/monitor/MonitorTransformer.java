@@ -10,16 +10,8 @@ import javassist.expr.MethodCall;
 import java.lang.instrument.ClassFileTransformer;
 import java.lang.instrument.IllegalClassFormatException;
 import java.security.ProtectionDomain;
-import java.util.HashSet;
-import java.util.Set;
 
 public class MonitorTransformer implements ClassFileTransformer {
-
-    private static final Set<String> CLASS_NAME_SET = new HashSet<>();
-
-    static {
-        CLASS_NAME_SET.add("test.study.agent.javassist.monitor.MonitorMain");
-    }
 
     @Override
     public byte[] transform(ClassLoader loader,
@@ -29,18 +21,31 @@ public class MonitorTransformer implements ClassFileTransformer {
                             byte[] classfileBuffer) throws IllegalClassFormatException {
         byte[] byteCode = null;
         try {
-            String currentClassName = className.replaceAll("/", ".");
-            if (!CLASS_NAME_SET.contains(currentClassName)) { //仅仅提升Set中含有的类
+            if(className == null){
+//                System.out.println("className is null");
                 return classfileBuffer;
             }
+            String currentClassName = className.replaceAll("/", ".");
+            if (!currentClassName.startsWith("study.agent") && !currentClassName.startsWith("test.study.agent")) {
+                return classfileBuffer;
+            }
+
             System.out.println("transform: [" + currentClassName + "]");
-            CtClass ctClass = ClassPool.getDefault().get(currentClassName);
+            ClassPool pool = ClassPool.getDefault();
+            if(pool ==null){
+                return classfileBuffer;
+            }
+            CtClass ctClass = pool.get(currentClassName);
+            if(ctClass == null){
+                return classfileBuffer;
+            }
             CtBehavior[] methods = ctClass.getDeclaredBehaviors();
             for (CtBehavior method : methods) {
                 enhanceMethod(method);
             }
             byteCode = ctClass.toBytecode();
         } catch (Exception ex) {
+            ex.printStackTrace();
 
         }
         return byteCode;

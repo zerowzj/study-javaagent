@@ -5,7 +5,7 @@ import com.sun.tools.attach.VirtualMachineDescriptor;
 
 import java.util.List;
 
-public class DynamicMainx {
+public class DynamicVmMain {
 
     private static final String AGENT = "D:\\idea\\study\\study-jdk-agent\\study-agent-javassist\\target\\study-agent.jar";
 

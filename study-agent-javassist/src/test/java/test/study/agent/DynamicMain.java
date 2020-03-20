@@ -1,4 +1,4 @@
-package test.study.agent.javassist;
+package test.study.agent;
 
 import com.sun.tools.attach.VirtualMachine;
 import com.sun.tools.attach.VirtualMachineDescriptor;

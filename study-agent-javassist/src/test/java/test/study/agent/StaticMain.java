@@ -1,4 +1,4 @@
-package test.study.agent.javassist;
+package test.study.agent;
 
 import java.util.concurrent.TimeUnit;
 

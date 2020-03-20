@@ -51,6 +51,7 @@
                 <configuration>
                     <skip>false</skip>
                     <failOnError>false</failOnError>
+                    <retryOnError>true</retryOnError>
                 </configuration>
             </plugin>
             <plugin>

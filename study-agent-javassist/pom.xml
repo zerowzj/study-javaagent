@@ -119,7 +119,8 @@
                             <additionalClasspathElements>
                                 ${target.path}/test-classes,${project.basedir}/../test-classes
                             </additionalClasspathElements>
-                            <arguments><!-- 设置java命令后面附带的参数 -->
+                            <!-- 设置java命令后面附带的参数 -->
+                            <arguments>
                                 <argument>-Dfile.encoding=utf-8</argument>
                                 <argument>-javaagent:${target.path}/study-agent.jar</argument>
                                 <argument>-classpath</argument>

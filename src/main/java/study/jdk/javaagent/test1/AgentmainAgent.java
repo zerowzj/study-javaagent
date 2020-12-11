@@ -10,4 +10,8 @@ public class AgentmainAgent {
     public static void premain(String agentArgs, Instrumentation inst) {
         log.info("");
     }
+
+    public static void premain(String agentArgs) {
+        log.info("");
+    }
 }
